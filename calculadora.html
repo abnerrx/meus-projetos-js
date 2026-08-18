@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <h1>Calculadora</h1>
+    <input id="visor">
+    <br>
+    <button id="sete">7</button>
+    <button id="oito">8</button>
+    <button id="nove">9</button>
+    <button id="divisao">/</button>
+    <br>
+    <button id="quatro">4</button>
+    <button id="cinco">5</button>
+    <button id="seis">6</button>
+    <button id="multiplicacao">*</button>
+    <br>
+    <button id="um">1</button>
+    <button id="dois">2</button>
+    <button id="tres">3</button>
+    <button id="subtracao">-</button>
+    <br>
+    <button id="limpar">C</button>
+    <button id="zero">0</button>
+    <button id="resultado">=</button>
+    <button id="soma">+</button>
+
+    <script>
+    let numero1;
+    let numero2;
+    let operacao = null;
+    let resultado = null;
+
+    let operadores = [
+        {
+            id: "divisao",
+            nome: "divisão",
+            simbolo: "/"
+        },
+        {
+            id: "multiplicacao",
+            nome: "multiplicação",
+            simbolo: "*"
+        },
+        {
+            id: "subtracao",
+            nome: "subtração",
+            simbolo: "-"
+        },
+        {
+            id: "soma",
+            nome: "soma",
+            simbolo: "+"
+        }
+    ];
+
+    let numeros_string = [
+        "zero",
+        "um",
+        "dois",
+        "tres",
+        "quatro",
+        "cinco",
+        "seis",
+        "sete",
+        "oito",
+        "nove"
+    ];
+
+    let visor = document.getElementById("visor");
+    visor.value = "";
+
+    for (let i = 0; i < 10; i++){
+        let botao = document.getElementById(numeros_string[i]);
+
+        botao.onclick = function(){
+            visor.value += i;
+        }
+    }
+
+    for (let i = 0; i < 4; i++){
+        let botao_operador = document.getElementById(operadores[i].id);
+
+        botao_operador.onclick = function(){
+            operacao = operadores[i].simbolo;
+            numero1 = Number(visor.value);
+            visor.value = "";
+        }
+    }
+
+    let botao_resultado = document.getElementById("resultado");
+
+    botao_resultado.onclick = function(){
+        numero2 = Number(visor.value);
+
+        if (operacao == "+"){
+            resultado = numero1 + numero2; 
+        } else if (operacao == "-"){
+            resultado = numero1 - numero2;
+        } else if (operacao == "*"){
+            resultado = numero1 * numero2;
+        } else if (operacao == "/"){
+            if (numero2 == 0){
+                visor.value = "Indeterminado";
+                return;
+            } else {
+                resultado = numero1 / numero2;
+            }
+        } else {
+            return;
+        }
+
+        visor.value = resultado;
+        numero1 = resultado;
+        numero2 = null;
+        operacao = null;
+    }
+
+    let botao_limpar = document.getElementById("limpar");
+
+    botao_limpar.onclick = function(){
+        visor.value = "";
+        numero1 = null;
+        numero2 = null;
+        operacao = null;
+        resultado = null;
+    }
+</script>
+</body>
+</html>

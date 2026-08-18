@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+    <title>Adivinhar o numero</title>
+</head>
+<body>
+    <h1>Adivinhar o Número</h1>
+    <h2>Á máquina escolheu um número de 1 à 100, digite na caixa abaixo qual é o seu palpite:</h2>
+    <input id="palpite" type="number">
+    <br>
+    <button id="feito">Feito</button>
+    <br>
+    <h3 id="resultado"></h3>
+    <script>
+        let numero_aleatorio = Math.floor((Math.random())* (100) + 1);
+        let campo = document.getElementById("palpite");
+        console.log(numero_aleatorio);
+        
+        let resultado = document.getElementById("resultado");
+        
+        document.getElementById("feito").onclick = function(){
+            let valor = campo.value;
+            if (valor == numero_aleatorio){
+                resultado.textContent = "Acertou !";
+            } else if(valor < numero_aleatorio){
+                resultado.textContent = "Errou, o valor é mais alto !";
+            } else{
+                resultado.textContent = "Errou, o valor é mais baixo !";
+            }
+        }
+    </script>
+</body>
+</html>
